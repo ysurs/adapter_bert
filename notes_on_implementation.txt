@@ -1,5 +1,3 @@
-
-
 26th March:
 
 what i have done ?
@@ -20,3 +18,7 @@ order in which operations are performed:
 3. Based on the max_length in encode_plus function, tokenised sentences are restricted in length.
 4. if length of sentence is greater than max_length, the sentence is truncated so that the total length of the sentence including cls and sep
 token is fixed to max_length.
+
+2. Figuring out why near identity initialisation is required for adapters.
+
+Working on a toy example, will add small explanaiton here.
