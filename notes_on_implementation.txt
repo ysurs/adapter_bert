@@ -1,0 +1,22 @@
+
+
+26th March:
+
+what i have done ?
+
+1. Implemented adapter architecture
+2. Have a blue print of how dataset.py should look like.
+
+
+Additions:
+
+1. Sentence in the dataset are of different lengths and hence after tokenisation, lengths will be different. We need to restrict it to constant value.
+reference here: https://albertauyeung.github.io/2020/06/19/bert-tokenization.html/
+
+order in which operations are performed:
+
+1. CLS and SEP tokens are added at the extremities
+2. Tokenisation takes place and each generated token is given a unique token id.
+3. Based on the max_length in encode_plus function, tokenised sentences are restricted in length.
+4. if length of sentence is greater than max_length, the sentence is truncated so that the total length of the sentence including cls and sep
+token is fixed to max_length.
