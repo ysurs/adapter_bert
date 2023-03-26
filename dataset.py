@@ -11,14 +11,22 @@ class dataset_adapter(data_utils.Dataset):
         self.tokenizer=tokenizer
     
     
-    def __len__(self,data):
-        return self.data.shape[0]
+    def __len__(self):
+        return len(self.data)
     
     
     def __getitem__(self,idx):
         row=self.data.iloc[idx]
         
-        tokenised_sentence=self.tokenizer(row['sentence'],return_tensors="pt")
+        
+        # All input tokenized input sentences will be of length 15.
+        tokenised_sentence=self.tokenizer.encode_plus(
+            row['sentence'],
+            max_length=15,
+            padding='max_length',
+            truncation=True,
+            return_tensors="pt")
+        
         label=row['acceptibility']
         
-        return {"acceptibility":label,"sentence":tokenised_sentence}
+        return {"acceptibility":label,**tokenised_sentence}
