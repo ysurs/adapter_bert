@@ -19,7 +19,7 @@ class dataset_adapter(data_utils.Dataset):
         row=self.data.iloc[idx]
         
         
-        # All input tokenized input sentences will be of length 15.
+        # All tokenized input sentences will be of lensgth 15.
         tokenised_sentence=self.tokenizer.encode_plus(
             row['sentence'],
             max_length=15,
