@@ -21,4 +21,4 @@ token is fixed to max_length.
 
 2. Figuring out why near identity initialisation is required for adapters.
 
-Working on a toy example, will add small explanaiton here.
+Working on a toy example, will add small explanaton here.
