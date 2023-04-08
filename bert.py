@@ -738,6 +738,12 @@ class BertPreTrainedModel(PreTrainedModel):
         elif isinstance(module, nn.LayerNorm):
             module.bias.data.zero_()
             module.weight.data.fill_(1.0)
+        elif isinstance(module, AdapterModule):
+            # correct place to do near zero initialization
+            module.linear_down_projection.weight.data.normal_(mean=0.0, std=self.config.initializer_range)
+            module.linear_down_projection.bias.data.zero_()
+            module.linear_up_projection.weight.data.normal_(mean=0.0, std=self.config.initializer_range)
+            module.linear_up_projection.bias.data.zero_()
 
     def _set_gradient_checkpointing(self, module, value=False):
         if isinstance(module, BertEncoder):
@@ -775,7 +781,7 @@ class BertForPreTrainingOutput(ModelOutput):
     attentions: Optional[Tuple[torch.FloatTensor]] = None
 
 
-BERT_START_DOCSTRING = r"""
+BERT_START_DOCSTRING = r"""adapter
     This model inherits from [`PreTrainedModel`]. Check the superclass documentation for the generic methods the
     library implements for all its model (such as downloading or saving, resizing the input embeddings, pruning heads
     etc.)
