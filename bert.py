@@ -6,7 +6,7 @@ from typing import List, Optional, Tuple, Union
 import torch
 import torch.utils.checkpoint
 from torch import nn
-from .model import adapter
+from adapter import adapter
 
 from transformers.activations import ACT2FN
 from transformers.modeling_outputs import (
