@@ -22,3 +22,9 @@ token is fixed to max_length.
 2. Figuring out why near identity initialisation is required for adapters.
 
 Working on a toy example, will add small explanaton here.
+
+
+3. When a sequence of tokens is passed into bert, when we extract the last hidden state, we get contextual representation of each token.
+The size of the representation is 768 in this case.
+
+4. For classification task, we extract the representation of the CLS token.
