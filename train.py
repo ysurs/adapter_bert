@@ -13,14 +13,14 @@ class Trainer:
     def __init__(self):
         self.model = BertClassifier(num_labels = 1)
         self.gpu_present = torch.cuda.is_available()
-        wandb.init(project="c4ai-adapter-bert")
+        
 
         if self.gpu_present:
             self.model = self.model.cuda()
 
         tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.train_dataset = dataset_adapter('/Users/yashsurange/adapter_bert/cola_dataset/raw/in_domain_train.tsv', tokenizer)
-        self.val_dataset = dataset_adapter('/Users/yashsurange/adapter_bert/cola_dataset/raw/in_domain_dev.tsv', tokenizer)
+        self.train_dataset = dataset_adapter('/content/adapter_bert/cola_dataset/raw/in_domain_train.tsv', tokenizer)
+        self.val_dataset = dataset_adapter('/content/adapter_bert/cola_dataset/raw/in_domain_dev.tsv', tokenizer)
 
         self.loss_fct = nn.BCEWithLogitsLoss()
         
@@ -82,7 +82,7 @@ class Trainer:
                     labels=labels.float()
                     loss = self.compute_loss(outputs, labels)
                     valid_loss += loss.item()
-                
+            wandb.init(project="c4ai-adapter-bert")
             wandb.log({
                     'epoch': i,
                     'train_loss': training_loss/len(self.train_dataloader),
