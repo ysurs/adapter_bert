@@ -71,14 +71,15 @@ class Trainer:
                 self.scheduler.step()
                 
             # Validation Step
-            valid_loss += 0.0
+            valid_loss = 0.0
             with torch.no_grad():
                 for batch in tqdm(self.valloader):
                     inputs, labels,mask = batch['input_ids'].squeeze(1), batch['labels'],batch['attention_mask']
                     if self.gpu_present:
                         inputs, labels,mask = inputs.cuda(), labels.cuda(),mask.cuda()
                     
-                    outputs = self.model(input)
+                    outputs = self.model(inputs)
+                    labels=labels.float()
                     loss = self.compute_loss(outputs, labels)
                     valid_loss += loss.item()
                 
