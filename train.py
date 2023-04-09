@@ -85,10 +85,10 @@ class Trainer:
                 
             wandb.log({
                     'epoch': i,
-                    'train_loss': training_loss/len(train_dataloader),
-                    'val_loss': valid_loss/len(val_dataloader)
+                    'train_loss': training_loss/len(self.train_dataloader),
+                    'val_loss': valid_loss/len(self.val_dataloader)
                 })
-            print(f'Epoch {i}\t\tTraining Loss: {train_loss/len(train_dataloader)}\t\tValidation Loss: {valid_loss/len(val_dataloader)}')
+            print(f'Epoch {i}\t\tTraining Loss: {training_loss/len(self.train_dataloader)}\t\tValidation Loss: {valid_loss/len(self.val_dataloader)}')
             wandb.finish()
                 
             
